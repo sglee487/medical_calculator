@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import './page/ready_page.dart';
 import './page/settings_page.dart';
@@ -13,14 +14,22 @@ import './page/change_password_page.dart';
 import './page/epinephrine_rate_page.dart';
 
 void main() async {
+  // await dotenv.load(fileName: 'assets/.env');
   await dotenv.load(fileName: '.env');
-  await initializeDateFormatting('kr_KR', null);
+  await EasyLocalization.ensureInitialized();
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+        supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('ko', 'KR'),
+        child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +43,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       initialRoute: '/',
       onGenerateRoute: (settings) {
         switch (settings.name) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medical_calculator/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NavigationDrawer extends StatelessWidget {
   final int index;
@@ -21,9 +22,9 @@ class NavigationDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Header',
+                'common.menu',
                 style: textTheme.headline6,
-              ),
+              ).tr(),
             ),
             const Divider(
               height: 1,
@@ -31,18 +32,20 @@ class NavigationDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.settings_rounded),
-              title: const Text('settings'),
+              title: const Text('common.settings').tr(),
               selected: index == 0,
               onTap: () {
-                Navigator.pushNamed(context, '/settings');
+                Navigator.pushReplacementNamed(context, '/settings');
               },
             ),
             ListTile(
               leading: const FaIcon(FontAwesome5.syringe),
-              title: const Text('Epinephrine Rate'),
+              // title: const Text('Epinephrine Rate'),
+              title: const Text('Epinephrine Rate').tr(),
+              subtitle: const Text('에피네프린 주사량'),
               selected: index == 1,
               onTap: () {
-                Navigator.pushNamed(context, '/epinephrine');
+                Navigator.pushReplacementNamed(context, '/epinephrine');
               },
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '/components/navigation_drawer.dart';
 import '/components/topBar.dart';
@@ -17,7 +18,6 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _newPasswordConfirmController =
@@ -26,20 +26,18 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   void _changePassword(context) async {
     if (!RegExp(r'^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
         .hasMatch(_passwordController.text)) {
-      showSimpleDialog(context,
-          'Please enter a password with at least 8 characters, one lowercase letter and one number.');
+      showSimpleDialog(context, 'message.passwordStrict'.tr());
       return;
     }
 
     if (!RegExp(r'^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
         .hasMatch(_newPasswordController.text)) {
-      showSimpleDialog(context,
-          'Please enter a password with at least 8 characters, one lowercase letter and one number.');
+      showSimpleDialog(context, 'message.passwordStrict'.tr());
       return;
     }
 
     if (_newPasswordController.text != _newPasswordConfirmController.text) {
-      showSimpleDialog(context, 'Please confirm your password.');
+      showSimpleDialog(context, 'message.confirmPassword'.tr());
       return;
     }
 
@@ -47,21 +45,20 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       await changePassword(
           _passwordController.text, _newPasswordController.text);
       Globals().logout();
-      Navigator.pushNamed(context, '/settings');
+      Navigator.pushReplacementNamed(context, '/settings');
 
-      showSimpleDialog(
-          context, 'Change password success!\nPlease login again.');
+      showSimpleDialog(context, 'message.changePasswordSeccess'.tr());
     } on DioError {
-      showSimpleDialog(context, 'Please confirm your password.');
+      showSimpleDialog(context, 'message.confirmPassword'.tr());
     } catch (e) {
-      showSimpleDialog(context, 'Unable to register. Please try again later.');
+      showSimpleDialog(context, 'message.unableRegister'.tr());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const TopBar(title: 'Change Password'),
+        appBar: TopBar(title: 'common.changePassword'.tr()),
         body: SingleChildScrollView(
           child: Container(
             decoration: const BoxDecoration(color: kBackgroundColor1),
@@ -70,7 +67,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 width: kDefaultWidth * 0.75,
                 child: Column(
                   children: [
-                    const Text('Change Password'),
+                    const Text('common.changePassword').tr(),
                     Column(
                       children: [
                         TextFormField(
@@ -80,8 +77,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           autocorrect: false,
                           cursorColor: Colors.black,
                           style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Password',
+                          decoration: InputDecoration(
+                            labelText: 'common.password'.tr(),
                           ),
                         ),
                         TextFormField(
@@ -91,8 +88,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           autocorrect: false,
                           cursorColor: Colors.black,
                           style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'New password',
+                          decoration: InputDecoration(
+                            labelText: 'common.newPassword'.tr(),
                           ),
                         ),
                         TextFormField(
@@ -102,8 +99,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           autocorrect: false,
                           cursorColor: Colors.black,
                           style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'New Password Confirm',
+                          decoration: InputDecoration(
+                            labelText: 'common.newPasswordConfirm'.tr(),
                           ),
                         ),
                         Padding(
@@ -114,7 +111,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 _changePassword(context);
                               },
                               icon: const Icon(Icons.app_registration_rounded),
-                              label: const Text('Change Password'),
+                              label: const Text('common.changePassword').tr(),
                             )),
                         const Divider(
                           height: 10,
@@ -126,11 +123,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 0, 5, 0, kDefaultPadding),
                             child: TextButton.icon(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/settings');
+                                Navigator.pushReplacementNamed(
+                                    context, '/settings');
                               },
                               icon:
                                   const Icon(Icons.arrow_back_ios_new_rounded),
-                              label: const Text('Back'),
+                              label: const Text('common.back').tr(),
                             )),
                       ],
                     ),

@@ -1,0 +1,70 @@
+{
+  "common": {
+    "medicalCalculator": "Medical Calculator",
+    "home": "Home",
+    "memu": "Menu",
+    "settings": "Settings",
+    "login": "Login",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirm": "Confirm Password",
+    "newPassword": "New Password",
+    "newPasswordConfirm": "New Password Confirm",
+    "back": "Back",
+    "register": "Register",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "lostPassword": "Lost Password",
+    "remove": "Remove",
+    "changePassword": "Change Password",
+    "save": "Save",
+    "reset": "Reset",
+    "history": "History",
+    "send": "Send",
+    "cancel": "Cancel",
+    "removeAccount": "Remove Account",
+    "or": "Or",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithApple": "Sign in with Apple",
+    "areYouLossPassword": "Are you lost password?"
+  },
+  "menu": {
+    "Epinephrine Rate": "Epinephrine Rate"
+  },
+  "guide": {
+    "startupApp": "Starting App...",
+    "noRecord": "No Saved Record",
+    "injectionCapacityUnit": "Injection Capacity Unit",
+    "weight": "Weight",
+    "doseOfDrug": "Dose of Drug",
+    "sapAmountAfterMixing": "Sap Amount After Mixing",
+    "TheRateOfInjectionCapacityIs": "Injection rate is ",
+    "end": ".",
+    "trySave": "no saved data.\nPlease try to use \"save!\"",
+    "notSupportedOnWeb": "Error: not supported on web",
+    "waitingResult": "Waiting result..."
+  },
+  "message": {
+    "enterEmailAddress": "Please enter your email address.",
+    "enterValidEmail": "Please enter a valid email address.",
+    "passwordStrict": "Please enter a password with at least 8 characters, one lowercase letter and one number.",
+    "wrongEmailOrPassword": "Wrong email or password.",
+    "unableLogin": "Unable to login\nPlease try later.",
+    "registerSuccess": "Successfully signed up!",
+    "confirmPassword": "Please confirm your password.",
+    "changePasswordSuccess": "Change password success!\nPlease login again.",
+    "unableRegister": "Unable to register. Please try again later.",
+    "saved": "Saved!",
+    "passwordResetEmailSent": "Password reset email sent.",
+    "tryLater": "Please try later.",
+    "removeAccountSeccess": "Account removed.",
+    "unableRemoveAccount": "Unable to remove account\nPlease try again later.",
+    "confirmRemoveAccount": "are you sure to remove account?"
+  },
+  "settings": {
+    "privacyPolicy": "Privacy Policy",
+    "languageSetting": "Language Setting",
+    "contact": "Contact"
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '/components/navigation_drawer.dart';
 import '/components/topBar.dart';
@@ -24,19 +25,18 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _signUp(context) async {
     if (!EmailValidator.validate(_emailController.text)) {
-      showSimpleDialog(context, 'Please enter a valid email address.');
+      showSimpleDialog(context, 'message.enterValidEmail'.tr());
       return;
     }
 
     if (!RegExp(r'^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
         .hasMatch(_passwordController.text)) {
-      showSimpleDialog(context,
-          'Please enter a password with at least 8 characters, one lowercase letter and one number.');
+      showSimpleDialog(context, 'message.passwordStrict'.tr());
       return;
     }
 
     if (_passwordController.text != _passwordConfirmController.text) {
-      showSimpleDialog(context, 'Please confirm your password.');
+      showSimpleDialog(context, 'message.confirmPassword'.tr());
       return;
     }
 
@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          content: const Text('Successfully signed up!'),
+          content: Text('message.registerSuccess'.tr()),
           actions: [
             TextButton(
               child: const Text('OK'),
@@ -56,14 +56,14 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       );
     } catch (e) {
-      showSimpleDialog(context, 'Unable to register. Please try again later.');
+      showSimpleDialog(context, 'message.unableRegister'.tr());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const TopBar(title: 'Register'),
+        appBar: TopBar(title: 'common.register'.tr()),
         body: SingleChildScrollView(
           child: Container(
             decoration: const BoxDecoration(color: kBackgroundColor1),
@@ -72,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: kDefaultWidth * 0.75,
                 child: Column(
                   children: [
-                    const Text('Register'),
+                    Text('common.register'.tr()),
                     Column(
                       children: [
                         TextFormField(
@@ -82,8 +82,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           autocorrect: false,
                           cursorColor: Colors.black,
                           style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Email',
+                          decoration: InputDecoration(
+                            labelText: 'common.email'.tr(),
                           ),
                         ),
                         TextFormField(
@@ -93,8 +93,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           autocorrect: false,
                           cursorColor: Colors.black,
                           style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Password',
+                          decoration: InputDecoration(
+                            labelText: 'common.password'.tr(),
                           ),
                         ),
                         TextFormField(
@@ -104,8 +104,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           autocorrect: false,
                           cursorColor: Colors.black,
                           style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Password Confirm',
+                          decoration: InputDecoration(
+                            labelText: 'common.passwordconfirm'.tr(),
                           ),
                         ),
                         Padding(
@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 _signUp(context);
                               },
                               icon: const Icon(Icons.app_registration_rounded),
-                              label: const Text('Sign up'),
+                              label: const Text('common.register').tr(),
                             )),
                         const Divider(
                           height: 10,
@@ -128,11 +128,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                 0, 5, 0, kDefaultPadding),
                             child: TextButton.icon(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/login');
+                                Navigator.pushReplacementNamed(
+                                    context, '/login');
                               },
                               icon:
                                   const Icon(Icons.arrow_back_ios_new_rounded),
-                              label: const Text('Back'),
+                              label: const Text('common.back').tr(),
                             )),
                       ],
                     ),

@@ -12,7 +12,7 @@ class TopBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       foregroundColor: Colors.blueGrey,
       shadowColor: Colors.transparent,
-      elevation: 3,
+      elevation: 1,
       title: Text(
         title,
         style: const TextStyle(

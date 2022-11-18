@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '/components/navigation_drawer.dart';
 import '/components/topBar.dart';
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.popAndPushNamed(context, '/settings');
       } else {
         // logout with google
-        showToastMessage('logout');
+        showToastMessage('common.logout'.tr());
       }
     }, onError: (Object err) {
       print('Error signing in: $err');
@@ -48,14 +49,13 @@ class _LoginPageState extends State<LoginPage> {
 
   void _loginEmail(context) async {
     if (!EmailValidator.validate(_emailController.text)) {
-      showSimpleDialog(context, 'Please enter a valid email address.');
+      showSimpleDialog(context, 'message.enterValidEmail'.tr());
       return;
     }
 
     if (!RegExp(r'^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
         .hasMatch(_passwordController.text)) {
-      showSimpleDialog(context,
-          'Please enter a password with at least 8 characters, one lowercase letter and one number.');
+      showSimpleDialog(context, 'message.passwordStrict'.tr());
       return;
     }
 
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       showSimpleDialog(context, _emailController.text);
       Navigator.popAndPushNamed(context, '/settings');
     } catch (e) {
-      showSimpleDialog(context, 'Wrong email or password');
+      showSimpleDialog(context, 'message.wrongEmailOrPassword'.tr());
     }
   }
 
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       googleSignIn.signIn();
     } catch (e) {
       print(e);
-      showSimpleDialog(context, 'Unable to login\nPlease try later');
+      showSimpleDialog(context, 'message.unableLogin'.tr());
     }
   }
 
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.popAndPushNamed(context, '/settings');
     } catch (e) {
       print(e);
-      showSimpleDialog(context, 'Unable to login\nPlease try later');
+      showSimpleDialog(context, 'message.unableLogin'.tr());
     }
 
     return;
@@ -110,8 +110,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title:
-            const Text('Please enter your email address', style: kLabelStyle),
+        title: const Text('message.enterEmailAddress', style: kLabelStyle).tr(),
         content: TextField(
           controller: _emailController,
           keyboardType: TextInputType.emailAddress,
@@ -123,14 +122,14 @@ class _LoginPageState extends State<LoginPage> {
         ),
         actions: [
           TextButton(
-            child: const Text('CANCEL'),
+            child: const Text('common.cancel').tr(),
             onPressed: () => Navigator.pop(context),
           ),
           ElevatedButton(
-            child: const Text('SEND'),
+            child: const Text('common.send').tr(),
             onPressed: () async {
               if (!EmailValidator.validate(_emailController.text)) {
-                showErrorToast('Please enter a valid email address');
+                showErrorToast('message.enterValidEmail'.tr());
                 return;
               }
               try {
@@ -141,9 +140,9 @@ class _LoginPageState extends State<LoginPage> {
                 }
 
                 Navigator.pop(context);
-                showToastMessage('Password reset email sent');
+                showToastMessage('message.passwordResetEmailSent'.tr());
               } catch (e) {
-                showErrorToast('Please try later');
+                showErrorToast('message.tryLater'.tr());
               }
             },
           ),
@@ -155,132 +154,131 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const TopBar(title: 'Login'),
+        appBar: TopBar(title: 'common.login'.tr()),
+        backgroundColor: kBackgroundColor1,
         body: SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(color: kBackgroundColor1),
-            child: Center(
-              child: SizedBox(
-                width: kDefaultWidth * 0.75,
-                child: Column(
-                  children: [
-                    const Text('Medical Calculator'),
-                    Column(
-                      children: [
-                        TextFormField(
-                          controller: _emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          textCapitalization: TextCapitalization.none,
-                          autocorrect: false,
-                          cursorColor: Colors.black,
-                          style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Email',
-                          ),
-                          textInputAction: TextInputAction.next,
+          child: Center(
+            child: SizedBox(
+              width: kDefaultWidth * 0.75,
+              child: Column(
+                children: [
+                  const Text('common.medicalCalculator').tr(),
+                  Column(
+                    children: [
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        textCapitalization: TextCapitalization.none,
+                        autocorrect: false,
+                        cursorColor: Colors.black,
+                        style: const TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          labelText: 'common.email'.tr(),
                         ),
-                        TextFormField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          cursorColor: Colors.black,
-                          style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Password',
-                          ),
-                          onFieldSubmitted: (_) => _loginEmail(context),
-                          textInputAction: TextInputAction.go,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        cursorColor: Colors.black,
+                        style: const TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          labelText: 'common.password'.tr(),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                                padding: const EdgeInsets.all(kDefaultPadding),
-                                child: TextButton.icon(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, '/register');
-                                    },
-                                    icon: const Icon(
-                                        Icons.app_registration_rounded),
-                                    label: const Text('Sign up'),
-                                    style: TextButton.styleFrom(
-                                        primary: Colors.black54))),
-                            Padding(
-                                padding: const EdgeInsets.all(kDefaultPadding),
-                                child: TextButton.icon(
-                                    onPressed: () {
-                                      _loginEmail(context);
-                                    },
-                                    icon: const Icon(Icons.login_rounded),
-                                    label: const Text('Sign in'),
-                                    style: TextButton.styleFrom(
-                                        primary: Colors.black54))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      height: kDefaultPadding,
-                      thickness: 1,
-                      color: Colors.transparent,
-                    ),
-                    Row(
-                      children: const [
-                        Expanded(child: Divider()),
-                        Text('또는'),
-                        Expanded(child: Divider())
-                      ],
-                    ),
-                    const Divider(
-                      height: kDefaultPadding,
-                      thickness: 1,
-                      color: Colors.transparent,
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {}, // needed
-                        child: SignInButton(
-                          Buttons.Google,
-                          text: 'Sign in with Google',
-                          padding: const EdgeInsets.all(10),
-                          onPressed: () {
-                            _loginGoogle(context);
-                          },
-                        ),
+                        onFieldSubmitted: (_) => _loginEmail(context),
+                        textInputAction: TextInputAction.go,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.all(kDefaultPadding),
+                              child: TextButton.icon(
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/register');
+                                  },
+                                  icon: const Icon(
+                                      Icons.app_registration_rounded),
+                                  label: const Text('common.signUp').tr(),
+                                  style: TextButton.styleFrom(
+                                      primary: Colors.black54))),
+                          Padding(
+                              padding: const EdgeInsets.all(kDefaultPadding),
+                              child: TextButton.icon(
+                                  onPressed: () {
+                                    _loginEmail(context);
+                                  },
+                                  icon: const Icon(Icons.login_rounded),
+                                  label: const Text('common.signIn').tr(),
+                                  style: TextButton.styleFrom(
+                                      primary: Colors.black54))),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    height: kDefaultPadding,
+                    thickness: 1,
+                    color: Colors.transparent,
+                  ),
+                  Row(
+                    children: [
+                      const Expanded(child: Divider()),
+                      const Text('common.or').tr(),
+                      const Expanded(child: Divider())
+                    ],
+                  ),
+                  const Divider(
+                    height: kDefaultPadding,
+                    thickness: 1,
+                    color: Colors.transparent,
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {}, // needed
+                      child: SignInButton(
+                        Buttons.Google,
+                        text: 'common.signInWithGoogle'.tr(),
+                        padding: const EdgeInsets.all(10),
+                        onPressed: () {
+                          _loginGoogle(context);
+                        },
                       ),
                     ),
-                    const Divider(
-                      height: kDefaultPadding,
-                      thickness: 1,
-                      color: Colors.transparent,
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {}, // needed
-                        child: SignInButton(
-                          Buttons.Apple,
-                          text: 'Sign in with Apple',
-                          padding: const EdgeInsets.all(10),
-                          onPressed: () {
-                            _loginApple(context);
-                          },
-                        ),
+                  ),
+                  const Divider(
+                    height: kDefaultPadding,
+                    thickness: 1,
+                    color: Colors.transparent,
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {}, // needed
+                      child: SignInButton(
+                        Buttons.Apple,
+                        text: 'common.signInWithApple'.tr(),
+                        padding: const EdgeInsets.all(10),
+                        onPressed: () {
+                          _loginApple(context);
+                        },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          0, kDefaultPadding, 0, kDefaultPadding / 2),
-                      child: TextButton(
-                          onPressed: () {
-                            _forgotPassword(context);
-                          },
-                          child: const Text('Are you lost password?')),
-                    )
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                        0, kDefaultPadding, 0, kDefaultPadding / 2),
+                    child: TextButton(
+                        onPressed: () {
+                          _forgotPassword(context);
+                        },
+                        child: const Text('common.areYouLossPassword').tr()),
+                  )
+                ],
               ),
             ),
           ),

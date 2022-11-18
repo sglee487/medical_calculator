@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '/globals.dart';
 import '/constants.dart';
@@ -22,18 +23,18 @@ class ReadyPage extends StatelessWidget {
         showToastMessage('${globals.user['email']} logined');
       }
 
-      Navigator.pushNamed(context, '/epinephrine');
+      Navigator.pushReplacementNamed(context, '/epinephrine');
     });
 
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(color: kBackgroundColor1),
-      child: const Center(
+      child: Center(
         child: SizedBox(
             width: kDefaultWidth,
             child: Padding(
-                padding: EdgeInsets.all(kDefaultPadding * 2),
-                child: Text('starting app...'))),
+                padding: const EdgeInsets.all(kDefaultPadding * 2),
+                child: const Text('guide.startupApp').tr())),
       ),
     ));
   }

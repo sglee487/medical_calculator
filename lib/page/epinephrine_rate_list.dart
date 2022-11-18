@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
@@ -112,7 +113,7 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
         );
       });
     } on DatabaseException {
-      throw "no saved record";
+      throw "guide.noRecord".tr();
     }
   }
 
@@ -140,7 +141,8 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                     Text(epinephrineRates[index].id.toString()),
                     Row(
                       children: [
-                        const Text('주입용량단위: ', style: TextStyle(fontSize: 12)),
+                        Text('${'guide.injectionCapacityUnit'.tr()}: ',
+                            style: const TextStyle(fontSize: 12)),
                         Text(epinephrineRates[index].dose,
                             style: const TextStyle(
                               fontSize: 14,
@@ -150,7 +152,9 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                         const Text('mcg/kg/min',
                             style: TextStyle(fontSize: 12)),
                         const VerticalDivider(),
-                        const Text('체중: ', style: TextStyle(fontSize: 12)),
+                        Text('${'guide.weight'.tr()}: ',
+                                style: const TextStyle(fontSize: 12))
+                            .tr(),
                         Text(epinephrineRates[index].weight,
                             style: const TextStyle(
                               fontSize: 14,
@@ -162,7 +166,9 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                     ),
                     Row(
                       children: [
-                        const Text('약물의 용량: ', style: TextStyle(fontSize: 12)),
+                        Text('${'guide.doseOfDrug'.tr()}: ',
+                                style: const TextStyle(fontSize: 12))
+                            .tr(),
                         Text(epinephrineRates[index].drug,
                             style: const TextStyle(
                               fontSize: 14,
@@ -171,8 +177,9 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                             )),
                         const Text('mg', style: TextStyle(fontSize: 12)),
                         const VerticalDivider(),
-                        const Text('혼합 후 수액량: ',
-                            style: TextStyle(fontSize: 12)),
+                        Text('${'guide.sapAmountAfterMixing'.tr()}: ',
+                                style: const TextStyle(fontSize: 12))
+                            .tr(),
                         Text(epinephrineRates[index].afterShuffleIV,
                             style: const TextStyle(
                               fontSize: 14,
@@ -188,9 +195,9 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                 Row(
                   children: [
                     const Text(
-                      '주입용량 속도는 ',
+                      'guide.TheRateOfInjectionCapacityIs',
                       style: TextStyle(fontSize: 12),
-                    ),
+                    ).tr(),
                     Text(
                       epinephrineRates[index].result,
                       style: const TextStyle(
@@ -199,9 +206,13 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                           fontWeight: FontWeight.bold),
                     ),
                     const Text(
-                      'cc/hr 입니다',
+                      'cc/hr',
                       style: TextStyle(fontSize: 12),
-                    )
+                    ),
+                    const Text(
+                      'guide.end',
+                      style: TextStyle(fontSize: 12),
+                    ).tr()
                   ],
                 ),
               ],
@@ -242,18 +253,18 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                   var data = snapshot.data;
                   data?.sort((a, b) => b.created_at.compareTo(a.created_at));
                   if (data!.isEmpty) {
-                    child = Column(children: const [
-                      Icon(
+                    child = Column(children: [
+                      const Icon(
                         Icons.check_circle_outline,
                         color: Colors.green,
                         size: 60,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 16),
-                        child: Text(
-                          'no saved data.\nPlease try to use "save"!',
+                        padding: const EdgeInsets.only(top: 16),
+                        child: const Text(
+                          'guide.trySave',
                           textAlign: TextAlign.center,
-                        ),
+                        ).tr(),
                       )
                     ]);
                   } else {
@@ -268,20 +279,20 @@ class _SqlEpinephrineRateListState extends State<SqlEpinephrineRateList> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16),
-                      child: Text('Error: not supported on web'),
+                      child: const Text('guide.notSupportedOnWeb').tr(),
                     )
                   ]);
                 } else {
                   child = Column(
-                    children: const [
-                      SizedBox(
+                    children: [
+                      const SizedBox(
                         width: 60,
                         height: 60,
                         child: CircularProgressIndicator(),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 16),
-                        child: Text('Awaiting result...'),
+                        padding: const EdgeInsets.only(top: 16),
+                        child: const Text('guide.waitingResult').tr(),
                       )
                     ],
                   );

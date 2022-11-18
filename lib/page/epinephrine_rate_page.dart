@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:uuid/uuid.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'epinephrine_rate_list.dart';
 
@@ -156,7 +157,7 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
     }
 
     await addEpinephrineRate(epinephrineRate);
-    showToastMessage('Saved!');
+    showToastMessage('message.saved'.tr());
   }
 
   void _reset() {
@@ -179,7 +180,7 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: const TopBar(title: 'Epinephrine Rate'),
+        appBar: TopBar(title: 'menu.Epinephrine Rate'.tr()),
         body: Container(
           decoration: const BoxDecoration(color: kBackgroundColor1),
           child: Center(
@@ -201,8 +202,9 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                                     keyboardType: TextInputType.number,
                                     cursorColor: Colors.black,
                                     style: const TextStyle(color: Colors.black),
-                                    decoration: const InputDecoration(
-                                        labelText: '주입용량단위(mcg/kg/min)'),
+                                    decoration: InputDecoration(
+                                        labelText:
+                                            '${"guide.injectionCapacityUnit".tr()}(mcg/kg/min)'),
                                     onChanged: (value) {
                                       calculate();
                                     },
@@ -216,8 +218,9 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                                     keyboardType: TextInputType.number,
                                     cursorColor: Colors.black,
                                     style: const TextStyle(color: Colors.black),
-                                    decoration: const InputDecoration(
-                                        labelText: '체중(kg)'),
+                                    decoration: InputDecoration(
+                                        labelText:
+                                            '${"guide.weight".tr()}(kg)'),
                                     onChanged: (value) {
                                       calculate();
                                     },
@@ -231,8 +234,9 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                                     keyboardType: TextInputType.number,
                                     cursorColor: Colors.black,
                                     style: const TextStyle(color: Colors.black),
-                                    decoration: const InputDecoration(
-                                        labelText: '약물의 용량(mg)'),
+                                    decoration: InputDecoration(
+                                        labelText:
+                                            '${"guide.doseOfDrug".tr()}(mg)'),
                                     onChanged: (value) {
                                       calculate();
                                     },
@@ -246,8 +250,9 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                                     keyboardType: TextInputType.number,
                                     cursorColor: Colors.black,
                                     style: const TextStyle(color: Colors.black),
-                                    decoration: const InputDecoration(
-                                        labelText: '혼합 후 수액량(ml)'),
+                                    decoration: InputDecoration(
+                                        labelText:
+                                            '${"guide.sapAmountAfterMixing".tr()}(ml)'),
                                     onChanged: (value) {
                                       calculate();
                                     },
@@ -267,9 +272,9 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                                           afterShuffleIV:
                                               afterShuffleIVController.text)),
                                       child: const Text(
-                                        'save',
+                                        'common.save',
                                         style: TextStyle(color: Colors.white),
-                                      )),
+                                      ).tr()),
                                 ),
                                 const Divider(
                                   height: 3,
@@ -280,10 +285,10 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                                       _reset();
                                     },
                                     child: const Text(
-                                      'reset',
+                                      'common.reset',
                                       style: TextStyle(
                                           decoration: TextDecoration.underline),
-                                    ))
+                                    ).tr())
                               ],
                             ),
                           ),
@@ -292,30 +297,30 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                 ),
                 Container(
                   width: size.width,
-                  decoration: BoxDecoration(color: Colors.blueGrey[800]!),
+                  decoration: const BoxDecoration(color: Colors.white70),
                   child: Padding(
                     padding: const EdgeInsets.all(kDefaultPadding),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            '주입 속도는 ',
-                            style: TextStyle(
-                                color: Colors.blueGrey[200]!, fontSize: 18),
-                          ),
+                          const Text(
+                            'guide.TheRateOfInjectionCapacityIs',
+                            style:
+                                TextStyle(color: Colors.black87, fontSize: 18),
+                          ).tr(),
                           Text(
                             '${_calculateResult}cc/hr',
                             style: const TextStyle(
-                                color: Colors.white,
+                                color: Colors.red,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 22),
                           ),
-                          Text(
-                            ' 입니다.',
-                            style: TextStyle(
-                                color: Colors.blueGrey[200]!, fontSize: 18),
-                          ),
+                          const Text(
+                            'guide.end',
+                            style:
+                                TextStyle(color: Colors.black87, fontSize: 18),
+                          ).tr(),
                         ],
                       ),
                     ),
@@ -338,7 +343,7 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
                         child: const SqlEpinephrineRateList(),
                       ));
             },
-            tooltip: 'history',
+            tooltip: 'common.history'.tr(),
             child: const Icon(Icons.history_outlined),
           ),
         ), // Thi,
