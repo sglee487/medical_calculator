@@ -22,7 +22,7 @@ class NavigationDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'common.menu',
+                'menu.menu',
                 style: textTheme.headline6,
               ).tr(),
             ),
@@ -41,8 +41,10 @@ class NavigationDrawer extends StatelessWidget {
             ListTile(
               leading: const FaIcon(FontAwesome5.syringe),
               // title: const Text('Epinephrine Rate'),
-              title: const Text('Epinephrine Rate').tr(),
-              subtitle: const Text('에피네프린 주사량'),
+              title: const Text('menu.epinephrineRate').tr(),
+              subtitle: context.locale.toString() == 'ko_KR'
+                  ? const Text('Epinephrine Rate')
+                  : const Text('에피네프린 주사량'),
               selected: index == 1,
               onTap: () {
                 Navigator.pushReplacementNamed(context, '/epinephrine');

@@ -121,7 +121,7 @@ class SettingsPage extends StatelessWidget {
                         thickness: 1,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text('settings.languageSetting').tr(),

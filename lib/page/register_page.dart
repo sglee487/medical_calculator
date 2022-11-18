@@ -105,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           cursorColor: Colors.black,
                           style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            labelText: 'common.passwordconfirm'.tr(),
+                            labelText: 'common.passwordConfirm'.tr(),
                           ),
                         ),
                         Padding(

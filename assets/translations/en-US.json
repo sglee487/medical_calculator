@@ -2,7 +2,6 @@
   "common": {
     "medicalCalculator": "Medical Calculator",
     "home": "Home",
-    "memu": "Menu",
     "settings": "Settings",
     "login": "Login",
     "logout": "Logout",
@@ -30,12 +29,13 @@
     "areYouLossPassword": "Are you lost password?"
   },
   "menu": {
-    "Epinephrine Rate": "Epinephrine Rate"
+    "menu": "Menu",
+    "epinephrineRate": "Epinephrine Rate"
   },
   "guide": {
     "startupApp": "Starting App...",
     "noRecord": "No Saved Record",
-    "injectionCapacityUnit": "Injection Capacity Unit",
+    "injectionCapacityUnit": "Injection Unit",
     "weight": "Weight",
     "doseOfDrug": "Dose of Drug",
     "sapAmountAfterMixing": "Sap Amount After Mixing",

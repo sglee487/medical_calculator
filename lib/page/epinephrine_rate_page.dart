@@ -180,7 +180,11 @@ class _EpinephrineRatePageState extends State<EpinephrineRatePage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: TopBar(title: 'menu.Epinephrine Rate'.tr()),
+        appBar: TopBar(
+            title: 'menu.epinephrineRate'.tr(),
+            subtitle: context.locale.toString() == 'ko_KR'
+                ? 'Epinephrine Rate'
+                : '에피네프린 주사량'),
         body: Container(
           decoration: const BoxDecoration(color: kBackgroundColor1),
           child: Center(

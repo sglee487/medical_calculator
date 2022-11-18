@@ -2,7 +2,6 @@
   "common": {
     "medicalCalculator": "의료 계산기",
     "home": "홈",
-    "memu": "메뉴",
     "settings": "설정",
     "login": "로그인",
     "logout": "로그아웃",
@@ -12,7 +11,7 @@
     "newPassword": "새 비밀번호",
     "newPasswordConfirm": "새 비밀번호 확인",
     "back": "뒤로",
-    "register": "등록",
+    "register": "회원가입",
     "signUp": "가입",
     "signIn": "로그인",
     "lostPassword": "비밀번호 분실",
@@ -30,7 +29,8 @@
     "areYouLossPassword": "비밀번호를 분실하셨습니까?"
   },
   "menu": {
-    "Epinephrine Rate": "에피네프린 주사량"
+    "menu": "메뉴",
+    "epinephrineRate": "에피네프린 주사량"
   },
   "guide": {
     "startupApp": "앱 시작중...",
